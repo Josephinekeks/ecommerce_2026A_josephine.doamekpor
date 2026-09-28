@@ -35,9 +35,29 @@ function is_logged_in() {
 // stored role equals 1 (admin)
 
 function is_admin() {
-    return is_logged_in() && $_SESSION['user_role'] == 1;
+    //=== strict comparison — checks type AND value
+// instead of == checks value only, converting types if needed.
+    return is_logged_in() && $_SESSION['user_role'] === 1;
 
 }
+
+//enforces that a page can only be viewed while logged in.
+function require_login() {
+    if (!is_logged_in()) {
+        redirect('/shoppn/views/login.php');
+    }
+}
+
+//enforces admin-only access.
+function require_admin() {
+    if (!is_admin()) {
+        // Store an error message so the page user land on can
+        // explain the  redirection 
+        $_SESSION['error'] = 'You do not have permission to view that page.';
+        redirect('/shoppn/index.php');
+    }
+}
+
 ?>
 
 
