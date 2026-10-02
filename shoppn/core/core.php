@@ -7,6 +7,7 @@ date_default_timezone_set('Africa/Accra');
 
 //calling the database class
 require_once __DIR__ . '/db_class.php';
+require_once __DIR__ . '/db_cred.php';
 
 
 // helper functions here
@@ -44,7 +45,7 @@ function is_admin() {
 //enforces that a page can only be viewed while logged in.
 function require_login() {
     if (!is_logged_in()) {
-        redirect('/shoppn/views/login.php');
+        redirect(BASE_URL . '/views/login.php');
     }
 }
 
@@ -54,7 +55,7 @@ function require_admin() {
         // Store an error message so the page user land on can
         // explain the  redirection 
         $_SESSION['error'] = 'You do not have permission to view that page.';
-        redirect('/shoppn/index.php');
+        redirect(BASE_URL . '/index.php');
     }
 }
 

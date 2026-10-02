@@ -1,19 +1,54 @@
 <?php
-require_once __DIR__ . '/../core/db_class.php';
-// Extends Database, so it automatically gets $conn and the
 
-class ProductController extends Database {
+require_once __DIR__ . '/../classes/ProductClass.php';
 
-    // Returns every row from the categories table as an array.
+class ProductController {
+
+    // Holds one instance of ProductClass, 
+    private $productClass;
+
+    public function __construct() {
+        $this->productClass = new ProductClass();
+    }
+
+    
     public function getCategories() {
-        $result = $this->conn->query("SELECT * FROM categories");
-        return $result->fetch_all(MYSQLI_ASSOC);
+        return $this->productClass->getCategories();
     }
 
-    // Returns every row from the brands table as an array.
-    public function getBrands() {
-        $result = $this->conn->query("SELECT * FROM brands");
-        return $result->fetch_all(MYSQLI_ASSOC);
+    public function getAllBrands() {
+        return $this->productClass->getAllBrands();
     }
+
+    // T add a new brand. 
+    public function addBrand($name) {
+        return $this->productClass->addBrand($name);
+    }
+
+    //  fetch one brand for editing.
+    public function getBrandById($id) {
+        return $this->productClass->getBrandById($id);
+    }
+
+    //  update an existing brand.
+    public function updateBrand($id, $name) {
+        return $this->productClass->updateBrand($id, $name);
+    }
+
+    public function addCategory($name) {
+    return $this->productClass->addCategory($name);
+}
+
+public function getAllCategories() {
+    return $this->productClass->getAllCategories();
+}
+
+public function getCategoryById($id) {
+    return $this->productClass->getCategoryById($id);
+}
+
+public function updateCategory($id, $name) {
+    return $this->productClass->updateCategory($id, $name);
+}
 }
 ?>

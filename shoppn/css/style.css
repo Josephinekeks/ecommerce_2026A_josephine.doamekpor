@@ -1,0 +1,221 @@
+/*  where all my styling resides */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+body {
+    font-family: Arial, sans-serif;
+    /* Cream background for the overall page/content area. */
+    background-color: #fdf6ec;
+    color: #3b2a20; /* dark brown text, readable against cream */
+}
+
+/* --- Header --- */
+header {
+    background-color: #6f4e37; 
+    color: #ffffff; 
+    padding: 20px;
+}
+
+header nav {
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+                   
+    flex-wrap: wrap; 
+    gap: 15px; 
+}
+
+header nav a {
+    color: #ffffff;
+    text-decoration: none; 
+}
+
+header nav a:hover {
+    text-decoration: underline; 
+                      
+}
+
+/* --- Footer --- */
+footer {
+    background-color: #6f4e37;
+    color: #ffffff;
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px; 
+}
+
+/* --- Main content area --- */
+main {
+    background-color: #fdf6ec; 
+    padding: 20px;
+    max-width: 1100px; /* keeps content from stretching too wide
+                       on large screens, improving readability */
+    margin: 0 auto; /* centers the content area horizontally */
+}
+
+/* --- Forms (register/login) --- */
+form {
+    display: flex;
+    flex-direction: column; 
+    max-width: 400px;
+    gap: 12px;
+}
+
+form input,
+form select,
+form textarea {
+    padding: 8px;
+    border: 1px solid #c9b8a8; 
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+form button {
+    background-color: #6f4e37;
+    color: #ffffff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer; 
+}
+
+form button:hover {
+    background-color: #5a3e2b; 
+                     
+}
+
+.error-message {
+    color: #b00020; 
+    font-size: 0.85rem;
+}
+
+/* --- Nav links spacing (replaces the old "|" characters) --- */
+header nav a,
+header nav span {
+    padding: 0 10px;
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    /* a soft, semi-transparent white line — visually separates
+       links without needing a literal "|" character typed in HTML */
+}
+
+header nav a:first-child,
+header nav span:first-child {
+    border-left: none;
+    /* the very first item shouldn't have a divider before it */
+    padding-left: 0;
+}
+
+/* --- Professional table styling --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    /* collapse merges adjacent cell borders into single clean lines,
+       instead of the default "double border" look between cells */
+    margin-top: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    /* a very subtle shadow, giving the table a slight "card" feel
+       rather than looking flat against the cream background */
+}
+
+thead {
+    background-color: #6f4e37; /* matches your brown header/footer */
+    color: #ffffff;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e5d9cc; /* soft line between rows */
+}
+
+tbody tr:hover {
+    background-color: #f5ece0; /* subtle highlight when hovering a row */
+}
+
+tbody tr:last-child td {
+    border-bottom: none; /* no line needed after the very last row */
+}
+
+table a {
+    color: #6f4e37;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+table a:hover {
+    text-decoration: underline;
+}
+/* --- Sidebar (categories & brands) --- */
+aside {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* same subtle "card" look as the table */
+}
+
+aside h3 {
+    color: #6f4e37; /* brown, ties the sidebar headings to your brand color */
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e5d9cc; /* a soft underline separating heading from list */
+}
+
+aside ul {
+    list-style: none;
+    
+    margin: 0;
+    padding: 0;
+}
+
+aside li {
+    padding: 8px 0;
+    border-bottom: 1px solid #f0e8de; /* a faint line between each item */
+}
+
+aside li:last-child {
+    border-bottom: none; /* no line after the final item in each list */
+}
+
+aside h3:not(:first-child) {
+    margin-top: 20px;
+    
+}
+
+.page-layout {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+}
+
+.page-layout aside {
+    width: 220px;
+    flex-shrink: 0;
+}
+
+.page-layout > section,
+.page-layout > .content {
+    flex: 1;
+}
+/* --- Consistent heading sizes site-wide --- */
+h1 {
+    font-size: 1.8rem;
+    color: #6f4e37;
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-size: 1.4rem;
+    color: #6f4e37;
+    margin: 20px 0 10px;
+}
+
+h3 {
+    font-size: 1.1rem;
+}

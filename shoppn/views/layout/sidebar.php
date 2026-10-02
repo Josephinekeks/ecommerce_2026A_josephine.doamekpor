@@ -3,7 +3,7 @@ require_once __DIR__ . '/../../controllers/ProductController.php';
 
 $productController = new ProductController();
 $categories = $productController->getCategories();
-$brands = $productController->getBrands();
+$brands = $productController->getAllBrands();
 ?>
 
 <aside>

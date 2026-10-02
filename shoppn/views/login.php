@@ -17,10 +17,10 @@ require_once __DIR__ . '/layout/header.php';
 
         <form method="POST" action="../actions/login_action.php">
 
-            <label for="email">Email</label><br>
+            <label for=" email"> Enter your Email</label><br>
             <input type="email" id="email" name="email" required><br>
 
-            <label for="pass">Password</label><br>
+            <label for="pass">Enter Password</label><br>
             <input type="password" id="pass" name="pass" required><br>
 
             <button type="submit">Login</button>

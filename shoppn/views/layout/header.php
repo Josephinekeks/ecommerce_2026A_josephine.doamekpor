@@ -6,15 +6,15 @@
      <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shoppn — Ladies' Fashion</title>
-    <link rel="stylesheet" href="/shoppn/assets/css/style.css">
+   <link rel="stylesheet" href="<?php echo BASE_URL; ?>/css/style.css">
 </head>
 <body>
 
 <header>
     <nav>
-        <a href="/shoppn/index.php">Shoppn</a>
+        <a href="<?php echo BASE_URL; ?>/index.php">Shoppn</a>
 
-        <form method="GET" action="/shoppn/index.php">
+        <form method="GET" action="<?php echo BASE_URL; ?>/index.php">
             <input
                 type="text"
                 name="search"
@@ -25,21 +25,19 @@
         </form>
 
         <?php if (is_logged_in()): ?>
-            <!-- Logged-in state: greet them by name, and give access
-                 to their account and a way to log out. -->
-            <span>
-                Welcome, <?php echo htmlspecialchars($_SESSION['customer_name']); ?>
-            </span>
-            |
-            <a href="/shoppn/views/account/my_account.php">My Account</a>
-            |
-            <a href="/shoppn/logout.php">Logout</a>
-        <?php else: ?>
-            <!-- Logged-out state: give them a path to either join
-                 or sign in. -->
-            <a href="/shoppn/views/register.php">Register</a>
-            |
-            <a href="/shoppn/views/login.php">Login</a>
-        <?php endif; ?>
+    <span>Welcome, <?php echo htmlspecialchars($_SESSION['customer_name']); ?></span>
+    
+    <a href="<?php echo BASE_URL; ?>/views/account/my_account.php">My Account</a>
+
+    <?php if (is_admin()): ?>
+         <a href="<?php echo BASE_URL; ?>/views/admin/brand.php">Brands</a>
+         <a href="<?php echo BASE_URL; ?>/views/admin/category.php">Categories</a>
+    <?php endif; ?>
+
+     <a href="<?php echo BASE_URL; ?>/logout.php">Logout</a>
+<?php else: ?>
+    <a href="<?php echo BASE_URL; ?>/views/register.php">Register</a>
+    <a href="<?php echo BASE_URL; ?>/views/login.php">Login</a>
+<?php endif; ?>
     </nav>
 </header>

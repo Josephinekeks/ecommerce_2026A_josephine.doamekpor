@@ -40,10 +40,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     
-    if (!empty($errors)) {
+    $passwordRegex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,}$/';
+
+    if (!preg_match($passwordRegex, $pass)) {
+        $errors[] = 'Password must be at least 8 characters and include an uppercase letter, a lowercase letter, a number, and a symbol.';
+    }
+
+      if (!empty($errors)) {
         $_SESSION['error'] = $errors[0]; 
         redirect('../views/register.php');
     }
+
 
  
     $customerController = new CustomerController();
@@ -62,16 +69,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result['success']) {
         // Log the new customer in immediately after registering —
         
-       $_SESSION['customer_id'] = $result['id'];
-        $_SESSION['user_role'] = 2; // every new signup is a regular customer
-       
-
-        redirect('../views/account/my_account.php');
+      $_SESSION['customer_id'] = $result['id'];
+      $_SESSION['customer_name'] = $name;
+      $_SESSION['customer_email'] = $email;
+      $_SESSION['user_role'] = 2; // every new signup is a regular customer
+                redirect('../views/account/my_account.php');
     } else {
         $_SESSION['error'] = $result['error'];
         redirect('../views/register.php');
     }
 
+    
 
 
 
