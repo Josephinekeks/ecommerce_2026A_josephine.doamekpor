@@ -219,3 +219,94 @@ h2 {
 h3 {
     font-size: 1.1rem;
 }
+
+.product-thumb {
+    width: 60px;
+    height: 60px;
+    object-fit: cover; 
+    border-radius: 4px;
+}
+
+.current-image {
+    max-width: 150px;
+    border-radius: 4px;
+}
+
+/* --- Product grid and cards --- */
+.page-layout > section {
+    min-width: 0; /* stops a wide grid from pushing the layout past the screen */
+}
+
+.product-grid {
+    display: grid;
+    /* As many columns as fit, each at least 190px wide, sharing the space equally */
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    background-color: #ffffff;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* fills the box without stretching the picture */
+    border-radius: 4px;
+}
+
+.product-card h3 {
+    margin: 10px 0 5px;
+}
+
+.price {
+    font-weight: bold;
+    color: #6f4e37;
+}
+
+.card-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.card-links a,
+aside a {
+    color: #6f4e37;
+    text-decoration: none;
+}
+
+.card-links a:hover,
+aside a:hover {
+    text-decoration: underline;
+}
+
+/* --- Single product page --- */
+.product-detail img {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+.product-detail p {
+    margin: 8px 0;
+}
+
+.button-link {
+    display: inline-block;
+    background-color: #6f4e37;
+    color: #ffffff;
+    padding: 10px 18px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.button-link:hover {
+    background-color: #5a3e2b;
+}

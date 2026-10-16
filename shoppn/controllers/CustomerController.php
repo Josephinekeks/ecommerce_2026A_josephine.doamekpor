@@ -62,6 +62,15 @@ public function login($email, $pass) {
         ];
     }
 }
+
+
+public function getAccount($id) {
+    return $this->customerClass->getCustomerById($id);
+}
+
+public function updateAccount($id, $name, $country, $city, $contact, $address) {
+    return $this->customerClass->updateCustomer($id, $name, $country, $city, $contact, $address);
+}
 }
 
 

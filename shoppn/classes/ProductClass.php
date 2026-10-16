@@ -95,6 +95,109 @@ public function updateCategory($id, $name) {
     return $success;
 }
 
+//inserting a new product
+public function addProduct($cat, $brand, $title, $price, $desc, $image, $keywords) {
+    $stmt = $this->conn->prepare(
+        "INSERT INTO products
+        (product_cat, product_brand, product_title, product_price, product_desc, product_image, product_keywords)
+        VALUES (?,?,?,?,?,?,?)"
+    );
+    $stmt->bind_param("iisdsss",$cat, $brand, $title, $price, $desc, $image, $keywords);
+    $success = $stmt->execute();
+    $stmt->close();
+    return $success;
+
+}
+
+//updating an existing product
+public function updateProduct($id, $cat, $brand, $title, $price, $desc, $image, $keywords){
+    $stmt = $this->conn->prepare(
+        "UPDATE products
+            SET product_cat = ?, product_brand = ?, product_title = ?, product_price = ?,
+                product_desc = ?, product_image = ?, product_keywords = ?
+          WHERE product_id = ?"
+    );
+    $stmt->bind_param("iisdsssi", $cat, $brand, $title, $price, $desc, $image, $keywords, $id);
+    $success = $stmt->execute();
+    $stmt->close();
+    return $success;
+}
+
+//using JOIN 
+public function getProductById($id) {
+    $stmt = $this->conn->prepare(
+        "SELECT p.*, c.cat_name, b.brand_name
+           FROM products p
+           JOIN categories c ON p.product_cat = c.cat_id
+           JOIN brands b ON p.product_brand = b.brand_id
+          WHERE p.product_id = ?"
+    );
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $product = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+    return $product ?: false;
+}
+
+// all product with names, newest fist
+public function getAllProducts() {
+    $result = $this->conn->query(
+        "SELECT p.*, c.cat_name, b.brand_name
+           FROM products p
+           JOIN categories c ON p.product_cat = c.cat_id
+           JOIN brands b ON p.product_brand = b.brand_id
+          ORDER BY p.product_id DESC"
+    );
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+
+// Task 10: random products for the home page.
+// ORDER BY RAND() shuffles the rows, LIMIT keeps only the first N.
+public function getFeaturedProducts($limit = 6) {
+    $stmt = $this->conn->prepare("SELECT * FROM products ORDER BY RAND() LIMIT ?");
+    $stmt->bind_param("i", $limit); 
+    $stmt->execute();
+    // fetch_all returns an empty array [] when nothing matches,
+   
+    $rows = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+    return $rows;
+}
+
+public function getProductsByCategory($cat_id) {
+    $stmt = $this->conn->prepare("SELECT * FROM products WHERE product_cat = ?");
+    $stmt->bind_param("i", $cat_id);
+    $stmt->execute();
+    $rows = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+    return $rows;
+}
+
+public function getProductsByBrand($brand_id) {
+    $stmt = $this->conn->prepare("SELECT * FROM products WHERE product_brand = ?");
+    $stmt->bind_param("i", $brand_id);
+    $stmt->execute();
+    $rows = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+    return $rows;
+}
+
+public function searchProducts($query) {
+    // The % wildcards go inside the VALUE
+
+    $like = '%' . $query . '%';
+
+    $stmt = $this->conn->prepare(
+        "SELECT * FROM products WHERE product_title LIKE ? OR product_keywords LIKE ?"
+    );
+    // Two placeholders, both strings
+    $stmt->bind_param("ss", $like, $like);
+    $stmt->execute();
+    $rows = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+    return $rows;
+}
 
 }
 ?>

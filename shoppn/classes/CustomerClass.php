@@ -94,6 +94,36 @@ public function login($email, $pass) {
     }
 
 }
+
+// Fetches one customer by their id — used to load account details
+// for display and to pre-fill the edit form. 
+public function getCustomerById($id) {
+    $stmt = $this->conn->prepare(
+        "SELECT * FROM customer WHERE customer_id = ?"
+    );
+    $stmt->bind_param("i", $id); // "i" — customer_id is an integer
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $customer = $result->fetch_assoc();
+    $stmt->close();
+
+    return $customer ?: false;
+}
+
+// Updates an existing customer's editable details.
+public function updateCustomer($id, $name, $country, $city, $contact, $address) {
+    $stmt = $this->conn->prepare(
+        "UPDATE customer
+            SET customer_name = ?, customer_country = ?, customer_city = ?, customer_contact = ?, customer_address = ?
+         WHERE customer_id = ?"
+    );
+    // "sssssi" — five strings (name, country, city, contact, address),
+    // then one integer (id) — matching the ? order left to right.
+    $stmt->bind_param("sssssi", $name, $country, $city, $contact, $address, $id);
+    $success = $stmt->execute();
+    $stmt->close();
+    return $success;
+}
 }
 
 

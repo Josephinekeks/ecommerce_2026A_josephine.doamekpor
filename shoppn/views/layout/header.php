@@ -14,15 +14,15 @@
     <nav>
         <a href="<?php echo BASE_URL; ?>/index.php">Shoppn</a>
 
-        <form method="GET" action="<?php echo BASE_URL; ?>/index.php">
-            <input
-                type="text"
-                name="search"
-                placeholder="Search products..."
-                value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>"
-            >
-            <button type="submit">Search</button>
-        </form>
+       <form method="GET" action="<?php echo BASE_URL; ?>/views/search_results.php">
+    <input
+        type="text"
+        name="user_query"
+        placeholder="Search products..."
+        value="<?php echo isset($_GET['user_query']) ? htmlspecialchars($_GET['user_query']) : ''; ?>"
+    >
+    <button type="submit">Search</button>
+</form>
 
         <?php if (is_logged_in()): ?>
     <span>Welcome, <?php echo htmlspecialchars($_SESSION['customer_name']); ?></span>
@@ -32,6 +32,7 @@
     <?php if (is_admin()): ?>
          <a href="<?php echo BASE_URL; ?>/views/admin/brand.php">Brands</a>
          <a href="<?php echo BASE_URL; ?>/views/admin/category.php">Categories</a>
+         <a href="<?php echo BASE_URL; ?>/views/admin/product.php">Products</a>
     <?php endif; ?>
 
      <a href="<?php echo BASE_URL; ?>/logout.php">Logout</a>
