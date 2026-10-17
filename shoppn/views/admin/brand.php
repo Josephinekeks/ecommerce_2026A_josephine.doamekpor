@@ -67,7 +67,7 @@ if (isset($_GET['edit_id'])) {
 
     <h2>All Brands</h2>
 
-    <table border="1">
+    <table>
         <thead>
             <tr>
                 <th>Brand Name</th>
