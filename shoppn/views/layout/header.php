@@ -42,3 +42,17 @@
 <?php endif; ?>
     </nav>
 </header>
+<?php
+// Runs on every page, so the cart summary is always up to date.
+// Variable names start with "header" so they can't clash with the page's own.
+require_once __DIR__ . '/../../controllers/CartController.php';
+$headerCart      = new CartController();
+$headerCartCount = $headerCart->getCartCount(get_ip());
+$headerCartTotal = $headerCart->getCartTotal(get_ip());
+?>
+<div class="cart-bar">
+    <span>Shopping Cart</span>
+    <span>Total Items: <?php echo $headerCartCount; ?></span>
+    <span>Total Price: GH&#8373; <?php echo number_format($headerCartTotal, 2); ?></span>
+    <a href="<?php echo BASE_URL; ?>/views/cart.php">Go to Cart</a>
+</div>

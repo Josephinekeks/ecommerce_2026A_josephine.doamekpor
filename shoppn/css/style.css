@@ -310,3 +310,75 @@ aside a:hover {
 .button-link:hover {
     background-color: #5a3e2b;
 }
+
+/* --- Cart summary bar under the header --- */
+.cart-bar {
+    background-color: #f0e4d4;
+    padding: 10px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.cart-bar span,
+.cart-bar a {
+    padding: 0 12px;
+    border-left: 1px solid #c9b8a8; /* divider drawn by CSS, no typed "|" */
+}
+
+.cart-bar > :first-child {
+    border-left: none;
+    padding-left: 0;
+    font-weight: bold;
+}
+
+.cart-bar a {
+    color: #6f4e37;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.cart-bar a:hover {
+    text-decoration: underline;
+}
+
+/* --- Session messages --- */
+.flash {
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.flash.success { background-color: #e6f4ea; color: #1e6b34; }
+.flash.error   { background-color: #fdecea; color: #b00020; }
+
+/* --- Cart page --- */
+/* The general "form" rule limits forms to 400px and stacks their contents.
+   This undoes that for the cart, so the table can use the full width. */
+.cart-form {
+    display: block;
+    max-width: none;
+}
+
+.cart-product {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.qty-input {
+    width: 70px;
+}
+
+tfoot td {
+    font-weight: bold;
+    background-color: #f5ece0;
+}
+
+.cart-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-top: 15px;
+}
