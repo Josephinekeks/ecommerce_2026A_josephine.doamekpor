@@ -47,9 +47,14 @@ require_once __DIR__ . '/layout/header.php';
                                 </div>
                             </td>
                             <!-- qty[5] means "the quantity for product 5" -->
-                            <td><input class="qty-input" type="number" min="1"
-                                       name="qty[<?php echo (int)$item['p_id']; ?>]"
-                                       value="<?php echo (int)$item['qty']; ?>"></td>
+                            <<!-- qty[] and update[] are matching lists: the hidden update[] box carries
+     this row's product id, so the action knows which product each
+     quantity belongs to.  -->
+<td>
+    <input class="qty-input" type="number" min="1" max="99"
+           name="qty[]" value="<?php echo (int)$item['qty']; ?>">
+    <input type="hidden" name="update[]" value="<?php echo (int)$item['p_id']; ?>">
+</td>
                             <td>GH&#8373; <?php echo number_format($item['product_price'], 2); ?></td>
                         </tr>
                     <?php endforeach; ?>

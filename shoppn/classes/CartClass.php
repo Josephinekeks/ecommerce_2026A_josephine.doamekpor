@@ -60,6 +60,45 @@ class CartClass extends Database {
         }
         return (float)$total;
     }
+
+    // Deletes one product from this visitor's cart.
+public function removeFromCart($product_id, $ip) {
+    // "AND ip_add = ?" means you can only remove rows from YOUR cart,
+    // even if someone edits the product id in the form.
+    $stmt = $this->conn->prepare(
+        "DELETE FROM cart WHERE p_id = ? AND ip_add = ?"
+    );
+    $stmt->bind_param("is", $product_id, $ip); // i = integer, s = string
+
+    // affected_rows = how many rows the DELETE removed. Requiring more than 0
+    // means we only report success if something was really deleted.
+    $success = $stmt->execute() && $stmt->affected_rows > 0;
+    $stmt->close();
+    return $success;
+}
+
+// Changes the quantity of one product in this visitor's cart.
+public function updateQty($product_id, $new_qty, $ip) {
+  
+    // even if a caller forgot to validate it first.
+    if ($new_qty < 1) {
+        return false;
+    }
+
+    $stmt = $this->conn->prepare(
+        "UPDATE cart SET qty = ? WHERE p_id = ? AND ip_add = ?"
+    );
+    // Order matches the ? marks: qty (i), product id (i), ip (s).
+    $stmt->bind_param("iis", $new_qty, $product_id, $ip);
+
+    // Only execute() here, not affected_rows. If the quantity didn't actually
+    // change, MySQL reports 0 affected rows, which isn't a failure.
+    $success = $stmt->execute();
+    $stmt->close();
+    return $success;
+}
+
+
 }
 ?>
 

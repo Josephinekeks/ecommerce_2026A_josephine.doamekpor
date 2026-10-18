@@ -29,5 +29,13 @@ class CartController {
     public function getCartTotal($ip) {
         return $this->cartClass->getCartTotal($ip);
     }
+
+    public function removeFromCart($product_id, $ip) {
+    return $this->cartClass->removeFromCart($product_id, $ip);
+}
+
+public function updateQty($product_id, $new_qty, $ip) {
+    return $this->cartClass->updateQty($product_id, $new_qty, $ip);
+}
 }
 ?>
